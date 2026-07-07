@@ -8,15 +8,8 @@ export default function Dashboard() {
   const hour = new Date().getHours();
 
   // GREETING
-  let greeting = "";
-
-  if (hour < 12) {
-    greeting = "Good Morning";
-  } else if (hour < 18) {
-    greeting = "Good Afternoon";
-  } else {
-    greeting = "Good Evening";
-  }
+  const greeting =
+    hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -24,16 +17,8 @@ export default function Dashboard() {
   const [tasks, setTasks] = useState([
     {
       id: 1,
-      title: "Complete Math Assignment",
-      description: "Finish chapter 5 and 6 exercises",
-      priority: "High",
-      status: "Pending",
-    },
-
-    {
-      id: 2,
-      title: "Practice React Hooks",
-      description: "Complete useState and useEffect exercises",
+      title: "Practice React",
+      description: "Complete all Advance Concepts",
       priority: "Medium",
       status: "Completed",
     },
@@ -84,48 +69,45 @@ export default function Dashboard() {
   const pendingTasks = tasks.filter((task) => task.status === "Pending").length;
 
   return (
-    <div className="p-5 bg-gray-100 h-screen overflow-hidden flex flex-col">
+    <div className="p-0 bg-gray-100 flex flex-col min-h-full">
       {/* Top Section */}
-      <div className="flex gap-5 mb-5">
-        <div className="flex-1 bg-indigo-50 rounded-2xl p-8 shadow-sm">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">
+      <div className="flex flex-col lg:flex-row gap-5 mb-5">
+        <div className="flex-1 bg-indigo-50 rounded-2xl p-6 sm:p-8 shadow-sm">
+          <h1 className="text-2xl sm:text-4xl font-bold text-gray-800 mb-4">
             Hello, {greeting} {admin?.name || "Student"} 👋
           </h1>
-
           <p className="text-gray-600">
             You have {pendingTasks} pending tasks today.
           </p>
         </div>
-
-        <div className="flex gap-4">
-          <div className="bg-white rounded-2xl p-6 w-32 text-center shadow-sm">
-            <h2 className="text-3xl font-bold text-gray-800">{tasks.length}</h2>
-
-            <p className="text-gray-500 mt-2">All Tasks</p>
+        <div className="grid grid-cols-3 gap-3 sm:gap-4">
+          <div className="bg-white rounded-2xl p-4 sm:p-6 text-center shadow-sm">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
+              {tasks.length}
+            </h2>
+            <p className="text-gray-500 mt-2 text-sm sm:text-base">All Tasks</p>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 w-32 text-center shadow-sm">
-            <h2 className="text-3xl font-bold text-yellow-500">
+          <div className="bg-white rounded-2xl p-4 sm:p-6 text-center shadow-sm">
+            <h2 className="text-2xl sm:text-3xl font-bold text-yellow-500">
               {pendingTasks}
             </h2>
-
-            <p className="text-gray-500 mt-2">Pending</p>
+            <p className="text-gray-500 mt-2 text-sm sm:text-base">Pending</p>
           </div>
 
-          <div className="bg-white rounded-2xl p-6 w-32 text-center shadow-sm">
-            <h2 className="text-3xl font-bold text-green-600">
+          <div className="bg-white rounded-2xl p-4 sm:p-6 text-center shadow-sm">
+            <h2 className="text-2xl sm:text-3xl font-bold text-green-600">
               {completedTasks}
             </h2>
-
-            <p className="text-gray-500 mt-2">Completed</p>
+            <p className="text-gray-500 mt-2 text-sm sm:text-base">Completed</p>
           </div>
         </div>
       </div>
 
       {/* Main Section */}
-      <div className="flex gap-5 flex-1 overflow-hidden">
+      <div className="flex flex-col lg:flex-row gap-5 flex-1">
         {/* Add Task */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm w-[350px]">
+        <div className="bg-white rounded-2xl p-6 shadow-sm w-full lg:w-87.5 lg:shrink-0">
           <h2 className="text-2xl font-semibold mb-5">Add New Task</h2>
 
           <input
@@ -158,22 +140,20 @@ export default function Dashboard() {
             <h2 className="text-2xl font-semibold">Tasks</h2>
           </div>
 
-          <div className="overflow-y-auto flex-1 pr-2">
+          <div className="flex-1 pr-0 sm:pr-2">
             {tasks.map((task) => (
               <div
                 key={task.id}
-                className="border border-gray-200 rounded-xl p-5 mb-4"
+                className="border border-gray-200 rounded-xl p-4 sm:p-5 mb-4"
               >
                 <h3 className="text-xl font-semibold text-gray-800">
                   {task.title}
                 </h3>
-
                 <p className="text-gray-500 mt-2">{task.description}</p>
-
-                <div className="flex items-center justify-between mt-5">
-                  {/* Status */}
+                {/*  Status  */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-5">
                   <span
-                    className={`px-4 py-1 rounded-full text-sm ${
+                    className={`px-4 py-1 rounded-full text-sm w-fit ${
                       task.status === "Completed"
                         ? "bg-green-100 text-green-600"
                         : "bg-yellow-100 text-yellow-600"

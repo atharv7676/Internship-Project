@@ -29,8 +29,6 @@ const handleLogout = () => {
   // Redirect To Login Page
   navigate("/login");
 
-  // Refresh App
-  window.location.reload();
 };
 
   return (

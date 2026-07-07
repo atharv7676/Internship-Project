@@ -1,6 +1,6 @@
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
 
 import Dashboard from "./pages/Dashboard";
@@ -28,9 +28,6 @@ export default function App() {
 
         {/* Page Content (THIS is where routing happens) */}
         <div className="p-3 sm:p-5 bg-[#f5f5f5] flex-1">
-          <div className="mb-3 text-xs text-slate-700 break-all">
-            Current path: {useLocation().pathname}
-          </div>
 
           <Routes>
             <Route

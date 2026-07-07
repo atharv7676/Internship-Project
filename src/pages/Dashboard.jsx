@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Dashboard() {
   // GET LOGGED IN USER
@@ -14,15 +14,24 @@ export default function Dashboard() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "Practice React",
-      description: "Complete all Advance Concepts",
-      priority: "Medium",
-      status: "Completed",
-    },
-  ]);
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("studentTasks");
+    return savedTasks
+      ? JSON.parse(savedTasks)
+      : [
+          {
+            id: 1,
+            title: "Practice React ",
+            description: "Complete all Advance topics And move to next technologies",
+            priority: "Medium",
+            status: "Completed",
+          },
+        ];
+  });
+
+  useEffect(() => {
+  localStorage.setItem("studentTasks", JSON.stringify(tasks));
+}, [tasks]);
 
   // Add Task
   const handleAddTask = () => {
